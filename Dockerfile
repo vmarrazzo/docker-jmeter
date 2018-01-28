@@ -1,7 +1,7 @@
 # 1
 FROM alpine:3.6
 # 2
-LABEL maintainer="pariamentz@gmail.com"
+LABEL maintainer="Vincenzo Marrazzo <pariamentz@gmail.com>"
 # 3 
 ARG JMETER_VERSION="3.3"
 # 4
@@ -16,9 +16,9 @@ RUN    apk update \
 	&& apk upgrade \
 	&& apk add ca-certificates \
 	&& update-ca-certificates \
-    && apk add --update openjdk8-jre tzdata curl unzip bash \
-    && cp /usr/share/zoneinfo/Europe/Rome /etc/localtime \
-    && echo "Europe/Rome" >  /etc/timezone \
+        && apk add --update openjdk8-jre tzdata curl unzip bash \
+        && cp /usr/share/zoneinfo/Europe/Rome /etc/localtime \
+        && echo "Europe/Rome" >  /etc/timezone \
 	&& rm -rf /var/cache/apk/* \
 	&& mkdir -p /tmp/dependencies  \
 	&& curl -L --silent ${JMETER_DOWNLOAD_URL} >  /tmp/dependencies/apache-jmeter-${JMETER_VERSION}.tgz  \

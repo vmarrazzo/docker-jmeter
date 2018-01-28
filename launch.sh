@@ -13,7 +13,7 @@ export JVM_ARGS="-Xmn${n}m -Xms${s}m -Xmx${x}m"
 
 if [ "$1" =  "client" ]
 then
-	CMD="jmeter-server"
+	CMD="jmeter -s"
 	ARGS=${@:2}
 else
 	CMD="jmeter"
