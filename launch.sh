@@ -11,20 +11,11 @@ x=$(($freeMem/10*8))
 n=$(($freeMem/10*2))
 export JVM_ARGS="-Xmn${n}m -Xms${s}m -Xmx${x}m"
 
-if [ "$1" =  "client" ]
-then
-	CMD="jmeter -s"
-	ARGS=${@:2}
-else
-	CMD="jmeter"
-	ARGS=$@
-fi
-
-echo "START Running $CMD on `date`"
+echo "START Running Apache JMeter on `date`"
 echo "JVM_ARGS=${JVM_ARGS}"
-echo "$CMD args=$ARGS"
+echo "$CMD args=$@"
 
 # Keep entrypoint simple: we must pass the standard JMeter arguments
-jmeter $ARGS
+jmeter $@
 echo "END Running Jmeter on `date`"
 
