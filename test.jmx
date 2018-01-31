@@ -143,7 +143,7 @@
 &lt;request&gt;request message&lt;/request&gt;
 &lt;/payload&gt;</stringProp>
           <stringProp name="RESPONSE_DATA">&lt;payload&gt;
-&lt;response&gt;Server${__Random(0,9)}&lt;/response&gt;
+&lt;response&gt;Server${__Random(0,9)}-${__machineIP}&lt;/response&gt;
 &lt;/payload&gt;</stringProp>
           <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
           <stringProp name="LATENCY">${__Random(1,50)}</stringProp>

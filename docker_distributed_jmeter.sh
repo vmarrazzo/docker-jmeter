@@ -10,12 +10,15 @@ jmeter_path=/mnt/jmeter
 
 DOCKER_NETWORK=tmpmynet123
 
+echo "Cleanup container history and unused network"
 docker ps | grep -v CONTAINER | awk '{print $1}' | xargs --no-run-if-empty docker stop
 docker ps --filter "status=exited" | grep -v CONTAINER |  awk '{print $1}' | xargs --no-run-if-empty docker rm
 docker network prune -f
 
+echo "Create testing network"
 docker network create --subnet=$SUB_NET/16 $DOCKER_NETWORK
 
+echo "Create servers"
 # servers
 for IP in "${SERVER_IPS[@]}"
 do
@@ -23,17 +26,20 @@ do
 	-dit \
 	--net $DOCKER_NETWORK --ip $IP \
 	-v "${volume_path}":${jmeter_path} \
+	--rm \
 	jmeter \
 	-s -n \
 	-Jclient.rmi.localport=7000 -Jserver.rmi.localport=60000 \
-	-Jreport_path=${jmeter_path} -Jsample_variables=extractredValue \
+	-l ${jmeter_path}/tmp/result_${timestamp}_${IP:9:3}.jtl \
 	-j ${jmeter_path}/tmp/slave_${timestamp}_${IP:9:3}.log 
 done
 
+echo "Create client and execute test"
 # client
 docker run \
   --net $DOCKER_NETWORK --ip $CLIENT_IP \
   -v "${volume_path}":${jmeter_path} \
+  --rm \
   jmeter \
   -n -X \
   -Jreport_path=${jmeter_path}/tmp -Jsample_variables=extractredValue \
