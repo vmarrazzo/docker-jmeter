@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  slave-1:
+    image: jmeter
+    volumes:
+     - .:/mnt/jmeter
+    command: -s -n -Jclient.rmi.localport=7000 -Jserver.rmi.localport=60000
+  slave-2:
+    image: jmeter
+    volumes:
+     - .:/mnt/jmeter
+    command: -s -n -Jclient.rmi.localport=7000 -Jserver.rmi.localport=60000
+  slave-3:
+    image: jmeter
+    volumes:
+     - .:/mnt/jmeter
+    command: -s -n -Jclient.rmi.localport=7000 -Jserver.rmi.localport=60000
