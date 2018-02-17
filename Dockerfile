@@ -3,7 +3,7 @@ FROM alpine:3.6
 # 2
 LABEL maintainer="Vincenzo Marrazzo <pariamentz@gmail.com>"
 # 3 
-ARG JMETER_VERSION="3.3"
+ARG JMETER_VERSION="4.0"
 # 4
 ENV JMETER_HOME /opt/apache-jmeter-${JMETER_VERSION}
 ENV JMETER_BIN  ${JMETER_HOME}/bin

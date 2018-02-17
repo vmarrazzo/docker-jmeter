@@ -27,6 +27,7 @@ do
 	jmeter \
 	-n -s \
 	-Jclient.rmi.localport=7000 -Jserver.rmi.localport=60000 \
+    -Jserver.rmi.ssl.disable=true \
 	-j ${jmeter_path}/server/slave_${timestamp}_${IP_ADD:9:3}.log 
 done
 
@@ -40,6 +41,7 @@ docker run \
   jmeter \
   -n -X \
   -Jclient.rmi.localport=7000 \
+  -Jserver.rmi.ssl.disable=true \
   -R $(echo $(printf ",%s" "${SERVER_IPS[@]}") | cut -c 2-) \
   -t ${jmeter_path}/test.jmx \
   -l ${jmeter_path}/client/result_${timestamp}.jtl \
@@ -47,3 +49,12 @@ docker run \
  
 #6
 docker network rm $TEST_NET
+
+
+#  -Jserver.rmi.ssl.keystore.type=JKS \
+#  -Jserver.rmi.ssl.keystore.file=${jmeter_path}/rmi_keystore.jks \
+#  -Jserver.rmi.ssl.keystore.password=changeit \
+#  -Jserver.rmi.ssl.keystore.alias=rmi \
+#  -Jserver.rmi.ssl.truststore.type=JKS \
+#  -Jserver.rmi.ssl.truststore.file=${jmeter_path}/rmi_keystore.jks \
+#  -Jserver.rmi.ssl.truststore.password=changeit \
