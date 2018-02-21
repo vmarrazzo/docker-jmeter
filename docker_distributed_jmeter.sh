@@ -14,7 +14,6 @@ TEST_NET=mydummynet
 echo "Create testing network"
 docker network create --subnet=$SUB_NET $TEST_NET
 
-
 #4
 echo "Create servers"
 for IP_ADD in "${SERVER_IPS[@]}"
@@ -30,7 +29,6 @@ do
     -Jserver.rmi.ssl.disable=true \
 	-j ${jmeter_path}/server/slave_${timestamp}_${IP_ADD:9:3}.log 
 done
-
 
 #5 
 echo "Create client and execute test"
@@ -49,12 +47,3 @@ docker run \
  
 #6
 docker network rm $TEST_NET
-
-
-#  -Jserver.rmi.ssl.keystore.type=JKS \
-#  -Jserver.rmi.ssl.keystore.file=${jmeter_path}/rmi_keystore.jks \
-#  -Jserver.rmi.ssl.keystore.password=changeit \
-#  -Jserver.rmi.ssl.keystore.alias=rmi \
-#  -Jserver.rmi.ssl.truststore.type=JKS \
-#  -Jserver.rmi.ssl.truststore.file=${jmeter_path}/rmi_keystore.jks \
-#  -Jserver.rmi.ssl.truststore.password=changeit \
