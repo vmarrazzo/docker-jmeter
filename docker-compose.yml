@@ -5,14 +5,14 @@ services:
     image: jmeter
     volumes:
      - .:/mnt/jmeter
-    command: -s -n -Jclient.rmi.localport=7000 -Jserver.rmi.localport=60000 -Jserver.rmi.ssl.disable=true
+    command: -s -n -Jserver.rmi.localport=60000 -Jserver.rmi.ssl.keystore.file=/mnt/jmeter/rmi_keystore.jks 
   slave-2:
     image: jmeter
     volumes:
      - .:/mnt/jmeter
-    command: -s -n -Jclient.rmi.localport=7000 -Jserver.rmi.localport=60000 -Jserver.rmi.ssl.disable=true
+    command: -s -n -Jserver.rmi.localport=60000 -Jserver.rmi.ssl.keystore.file=/mnt/jmeter/rmi_keystore.jks 
   slave-3:
     image: jmeter
     volumes:
      - .:/mnt/jmeter
-    command: -s -n -Jclient.rmi.localport=7000 -Jserver.rmi.localport=60000 -Jserver.rmi.ssl.disable=true
+    command: -s -n -Jserver.rmi.localport=60000 -Jserver.rmi.ssl.keystore.file=/mnt/jmeter/rmi_keystore.jks 
