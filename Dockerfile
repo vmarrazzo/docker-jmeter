@@ -26,7 +26,10 @@ RUN    apk update \
 	&& curl -L --silent ${JMETER_DOWNLOAD_URL} > /tmp/dependencies/apache-jmeter-${JMETER_VERSION}.tgz  \
 	&& mkdir -p /opt  \
 	&& tar -xzf /tmp/dependencies/apache-jmeter-${JMETER_VERSION}.tgz -C /opt  \
-	&& rm -rf /tmp/dependencies
+	&& rm -rf /tmp/dependencies \
+	&& rm -rf /opt/apache-jmeter-${JMETER_VERSION}/docs/ \
+	&& rm -rf /opt/apache-jmeter-${JMETER_VERSION}/printable_docs/ \
+	&& rm -rf /opt/apache-jmeter-${JMETER_VERSION}/licenses/
 
 # 6
 ENV PATH $PATH:$JMETER_BIN
