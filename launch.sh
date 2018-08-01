@@ -5,6 +5,7 @@
 #
 
 JMETER_DEBUG=${JMETER_DEBUG:-false}
+JMETER_USER_CLASSPATH=${JMETER_USER_CLASSPATH:=/opt/userclasspath}
 
 set -e
 freeMem=`awk '/MemFree/ { print int($2/1024) }' /proc/meminfo`
@@ -27,6 +28,6 @@ echo "JVM_ARGS=${JVM_ARGS}"
 echo "$CMD args=$@"
 
 # Keep entrypoint simple: we must pass the standard JMeter arguments
-jmeter $@
+jmeter -Juser.classpath="$JMETER_USER_CLASSPATH" $@
 echo "END Running Jmeter on `date`"
 

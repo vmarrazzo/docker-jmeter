@@ -1,5 +1,5 @@
 # 1
-FROM alpine:3.7
+FROM alpine:3.8
 
 # 2
 LABEL maintainer="Vincenzo Marrazzo <pariamentz@gmail.com>"
@@ -29,7 +29,8 @@ RUN    apk update \
 	&& rm -rf /tmp/dependencies \
 	&& rm -rf /opt/apache-jmeter-${JMETER_VERSION}/docs/ \
 	&& rm -rf /opt/apache-jmeter-${JMETER_VERSION}/printable_docs/ \
-	&& rm -rf /opt/apache-jmeter-${JMETER_VERSION}/licenses/
+	&& rm -rf /opt/apache-jmeter-${JMETER_VERSION}/licenses/ \
+	&& mkdir -p /opt/userclasspath
 
 # 6
 ENV PATH $PATH:$JMETER_BIN
